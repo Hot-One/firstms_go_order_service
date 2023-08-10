@@ -10,8 +10,9 @@ import (
 )
 
 type Store struct {
-	db   *pgxpool.Pool
-	user *UserRepo
+	db       *pgxpool.Pool
+	user     *UserRepo
+	customer *CustomerRepo
 }
 
 func NewPostgres(ctx context.Context, cfg config.Config) (storage.StorageI, error) {
@@ -50,4 +51,12 @@ func (s *Store) User() storage.UserRepoI {
 	}
 
 	return s.user
+}
+
+func (s *Store) Customer() storage.CustomerRepoI {
+	if s.customer == nil {
+		s.customer = NewCustomerRepo(s.db)
+	}
+
+	return s.customer
 }
