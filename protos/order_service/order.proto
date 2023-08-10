@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package order_service;
+
+option go_package = "genproto/order_service";
+
+import "google/protobuf/struct.proto";
+
+message Order{
+    string id = 1;
+    string name = 2;
+    double price = 3;
+    string phone_number = 4;
+    double latitude = 5;
+    double longtitude = 6;
+    string user_id = 7;
+    string customer_id = 8;
+    string courier_id = 9;
+    string product_id = 10;
+    double quantity = 11;
+}
+
+message OrderPrimaryKey {
+    string id = 1;
+}
+
+message OrderCreate {
+    string name = 2;
+    double price = 3;
+    string phone_number = 4;
+    double latitude = 5;
+    double longtitude = 6;
+    string user_id = 7;
+    string customer_id = 8;
+    string courier_id = 9;
+    string product_id = 10;
+    double quantity = 11;
+}
+
+message OrderUpdate {
+    string id = 1;
+    string name = 2;
+    double price = 3;
+    string phone_number = 4;
+    double latitude = 5;
+    double longtitude = 6;
+    string user_id = 7;
+    string customer_id = 8;
+    string courier_id = 9;
+    string product_id = 10;
+    double quantity = 11;
+}
+
+message OrderUpdatePatch {
+    string id = 1;
+    google.protobuf.Struct fields = 2;
+}
+
+message OrderGetListRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+    string search = 3;
+}
+
+message OrderGetListResponse {
+    int64 count = 1;
+    repeated Order Orders = 2;
+}

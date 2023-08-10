@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package customer_service;
+
+option go_package = "genproto/customer_service";
+
+import "google/protobuf/struct.proto";
+
+message Customer{
+    string id = 1;
+    string name = 2;
+    string phone = 3;
+}
+
+message CustomerPrimaryKey {
+    string id = 1;
+}
+
+message CustomerCreate {
+    string name = 1;
+    string phone = 2;
+}
+
+message CustomerUpdate {
+    string id = 1;
+    string name = 2;
+    string phone = 3;
+}
+
+message CustomerUpdatePatch {
+    string id = 1;
+    google.protobuf.Struct fields = 2;
+}
+
+message CustomerGetListRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+    string search = 3;
+}
+
+message CustomerGetListResponse {
+    int64 count = 1;
+    repeated Customer Customers = 2;
+}

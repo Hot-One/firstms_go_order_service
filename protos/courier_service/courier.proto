@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package courier_service;
+
+option go_package = "genproto/courier_service";
+
+import "google/protobuf/struct.proto";
+
+message Courier{
+    string id = 1;
+    string name = 2;
+    string phone_number = 3;
+}
+
+message CourierPrimaryKey {
+    string id = 1;
+}
+
+message CourierCreate {
+    string name = 1;
+    string phone_number = 2;
+}
+
+message CourierUpdate {
+    string id = 1;
+    string name = 2;
+    string phone_number = 3;
+}
+
+message CourierUpdatePatch {
+    string id = 1;
+    google.protobuf.Struct fields = 2;
+}
+
+message CourierGetListRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+    string search = 3;
+}
+
+message CourierGetListResponse {
+    int64 count = 1;
+    repeated Courier Couriers = 2;
+}

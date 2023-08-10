@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package product_service;
+
+option go_package = "genproto/product_service";
+
+import "google/protobuf/struct.proto";
+
+message Product{
+    string id = 1;
+    string name = 2;
+    double price = 3;
+    string category_id = 4;
+}
+
+message ProductPrimaryKey {
+    string id = 1;
+}
+
+message ProductCreate {
+    string name = 2;
+    double price = 3;
+    string category_id = 4;
+}
+
+message ProductUpdate {
+    string id = 1;
+    string name = 2;
+    double price = 3;
+    string category_id = 4;
+}
+
+message ProductUpdatePatch {
+    string id = 1;
+    google.protobuf.Struct fields = 2;
+}
+
+message ProductGetListRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+    string search = 3;
+}
+
+message ProductGetListResponse {
+    int64 count = 1;
+    repeated Product Products = 2;
+}

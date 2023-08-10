@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package customer_service;
+
+option go_package = "genproto/customer_service";
+
+import "google/protobuf/empty.proto";
+import "customer.proto";
+
+service CustomerService{
+    rpc Create(CustomerCreate) returns (Customer) {};
+    rpc GetById(CustomerPrimaryKey) returns (Customer) {};
+    rpc GetList(CustomerGetListRequest) returns (CustomerGetListResponse) {};
+    rpc Update(CustomerUpdate) returns (Customer) {};
+    rpc Patch(CustomerUpdatePatch) returns (Customer) {};
+    rpc Delete(CustomerPrimaryKey) returns (google.protobuf.Empty) {};
+}
