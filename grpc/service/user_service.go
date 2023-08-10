@@ -8,6 +8,7 @@ import (
 	"github.com/Hot-One/firstms_go_order_service/grpc/client"
 	"github.com/Hot-One/firstms_go_order_service/pkg/logger"
 	"github.com/Hot-One/firstms_go_order_service/storage"
+	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -87,5 +88,5 @@ func (u *UserService) Delete(ctx context.Context, req *user_service.UserPrimaryK
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	return nil, nil
+	return &empty.Empty{}, nil
 }
