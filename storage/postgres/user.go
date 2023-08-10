@@ -64,8 +64,6 @@ func (r *UserRepo) GetByID(ctx context.Context, req *user_service.UserPrimaryKey
 		id           sql.NullString
 		name         sql.NullString
 		phone_number sql.NullString
-		createdAt    sql.NullString
-		updatedAt    sql.NullString
 	)
 
 	query = `
@@ -74,15 +72,13 @@ func (r *UserRepo) GetByID(ctx context.Context, req *user_service.UserPrimaryKey
 			name,
 			phone_number
 		FROM users
-		WHERE = $1
+		WHERE id = $1
 	`
 
 	err := r.db.QueryRow(ctx, query, req.Id).Scan(
 		&id,
 		&name,
 		&phone_number,
-		&createdAt,
-		&updatedAt,
 	)
 
 	if err != nil {
@@ -187,9 +183,13 @@ func (r *UserRepo) Update(ctx context.Context, req *user_service.UserUpdate) (*u
 
 	query, args := helper.ReplaceQueryParams(query, params)
 
-	_, err := r.db.Exec(ctx, query, args...)
+	result, err := r.db.Exec(ctx, query, args...)
 	if err != nil {
 		return nil, err
+	}
+
+	if result.RowsAffected() == 0 {
+		return nil, nil
 	}
 
 	return &user_service.User{
