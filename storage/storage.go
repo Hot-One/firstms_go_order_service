@@ -2,7 +2,7 @@ package storage
 
 type StorageI interface {
 	CloseDB()
-	// User() UserRepoI
+	User() UserRepoI
 }
 
 type UserRepoI interface {
