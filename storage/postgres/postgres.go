@@ -14,6 +14,7 @@ type Store struct {
 	user     *UserRepo
 	customer *CustomerRepo
 	courier  *CourierRepo
+	category *CategoryRepo
 }
 
 func NewPostgres(ctx context.Context, cfg config.Config) (storage.StorageI, error) {
@@ -68,4 +69,12 @@ func (s *Store) Courier() storage.CourierRepoI {
 	}
 
 	return s.courier
+}
+
+func (s *Store) Category() storage.CategoryRepoI {
+	if s.category == nil {
+		s.category = NewCategoryRepo(s.db)
+	}
+
+	return s.category
 }
