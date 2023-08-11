@@ -5,6 +5,7 @@ import (
 	"github.com/Hot-One/firstms_go_order_service/genproto/category_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/courier_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/customer_service"
+	"github.com/Hot-One/firstms_go_order_service/genproto/product_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/user_service"
 	"github.com/Hot-One/firstms_go_order_service/grpc/client"
 	"github.com/Hot-One/firstms_go_order_service/grpc/service"
@@ -21,6 +22,7 @@ func SetUpServver(cfg config.Config, log logger.LoggerI, strg storage.StorageI, 
 	customer_service.RegisterCustomerServiceServer(grpcServer, service.NewCustomerService(cfg, log, strg, srvc))
 	courier_service.RegisterCourierServiceServer(grpcServer, service.NewCourierService(cfg, log, strg, srvc))
 	category_service.RegisterCategoryServiceServer(grpcServer, service.NewCategoryService(cfg, log, strg, srvc))
+	product_service.RegisterProductServiceServer(grpcServer, service.NewProductService(cfg, log, strg, srvc))
 
 	reflection.Register(grpcServer)
 	return

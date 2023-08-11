@@ -6,6 +6,7 @@ import (
 	"github.com/Hot-One/firstms_go_order_service/genproto/category_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/courier_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/customer_service"
+	"github.com/Hot-One/firstms_go_order_service/genproto/product_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/user_service"
 )
 
@@ -15,6 +16,7 @@ type StorageI interface {
 	Customer() CustomerRepoI
 	Courier() CourierRepoI
 	Category() CategoryRepoI
+	Product() ProductRepoI
 }
 
 type UserRepoI interface {
@@ -47,4 +49,12 @@ type CategoryRepoI interface {
 	GetList(context.Context, *category_service.CategoryGetListRequest) (*category_service.CategoryGetListResponse, error)
 	Update(context.Context, *category_service.CategoryUpdate) (*category_service.Category, error)
 	Delete(context.Context, *category_service.CategoryPrimaryKey) error
+}
+
+type ProductRepoI interface {
+	Create(context.Context, *product_service.ProductCreate) (*product_service.Product, error)
+	GetByID(context.Context, *product_service.ProductPrimaryKey) (*product_service.Product, error)
+	GetList(context.Context, *product_service.ProductGetListRequest) (*product_service.ProductGetListResponse, error)
+	Update(context.Context, *product_service.ProductUpdate) (*product_service.Product, error)
+	Delete(context.Context, *product_service.ProductPrimaryKey) error
 }
