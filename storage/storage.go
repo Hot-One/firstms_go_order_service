@@ -3,6 +3,7 @@ package storage
 import (
 	"context"
 
+	"github.com/Hot-One/firstms_go_order_service/genproto/courier_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/customer_service"
 	"github.com/Hot-One/firstms_go_order_service/genproto/user_service"
 )
@@ -11,6 +12,7 @@ type StorageI interface {
 	CloseDB()
 	User() UserRepoI
 	Customer() CustomerRepoI
+	Courier() CourierRepoI
 }
 
 type UserRepoI interface {
@@ -27,4 +29,12 @@ type CustomerRepoI interface {
 	GetList(context.Context, *customer_service.CustomerGetListRequest) (*customer_service.CustomerGetListResponse, error)
 	Update(context.Context, *customer_service.CustomerUpdate) (*customer_service.Customer, error)
 	Delete(context.Context, *customer_service.CustomerPrimaryKey) error
+}
+
+type CourierRepoI interface {
+	Create(context.Context, *courier_service.CourierCreate) (*courier_service.Courier, error)
+	GetByID(context.Context, *courier_service.CourierPrimaryKey) (*courier_service.Courier, error)
+	GetList(context.Context, *courier_service.CourierGetListRequest) (*courier_service.CourierGetListResponse, error)
+	Update(context.Context, *courier_service.CourierUpdate) (*courier_service.Courier, error)
+	Delete(context.Context, *courier_service.CourierPrimaryKey) error
 }

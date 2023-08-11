@@ -13,6 +13,7 @@ type Store struct {
 	db       *pgxpool.Pool
 	user     *UserRepo
 	customer *CustomerRepo
+	courier  *CourierRepo
 }
 
 func NewPostgres(ctx context.Context, cfg config.Config) (storage.StorageI, error) {
@@ -59,4 +60,12 @@ func (s *Store) Customer() storage.CustomerRepoI {
 	}
 
 	return s.customer
+}
+
+func (s *Store) Courier() storage.CourierRepoI {
+	if s.courier == nil {
+		s.courier = NewCourierRepo(s.db)
+	}
+
+	return s.courier
 }
